@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "mek01/MEK01_LABB__5_Array/MEK01_LABB__5_Array.ino",
+    "port": "/dev/tty.usbmodem14201"
+}
