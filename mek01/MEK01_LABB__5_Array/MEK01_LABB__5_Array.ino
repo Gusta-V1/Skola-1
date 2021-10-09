@@ -26,15 +26,19 @@ void setup() {
 void loop() {
   for (int i = 0; i < 3; i++){ //For loop with range 3
 
-    //Logic
+    //Input
     pot[i] = analogRead(potPins[i]); //Step through potentiometers and read each
-    mappedPot[i] = map(pot[i], 0, 1023, 0, 255); //Map potentiometer values to LED compatible integers
+    
+    //Logic
+    mappedPot[i] = map(pot[i], 0, 1023, 0, 255); //Map potentiometer values to LED compatible integers. CA LED Method 1: map to 255, 0
+    //mappedPot[i] = 255- mappedPot[i]; //Uncomment for CA LED method 2.
+
     
     //Output:
     analogWrite(ledPins[i], mappedPot[i]); //Output mapped values to LED
     Serial.print(pot[i]); //Print potentiometer setting
     Serial.print("\t");  //Space column period
-    Serial.print(Mappedpot[i]); //Print LED setting
+    Serial.print(mappedPot[i]); //Print LED setting
     Serial.print("\t"); //Space between column
   }
   Serial.print("\n"); //Break line
