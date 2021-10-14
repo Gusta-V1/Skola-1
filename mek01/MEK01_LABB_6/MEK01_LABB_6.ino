@@ -1,6 +1,6 @@
 /*
 Input: Use analog read to measure voltage between photocell and resistor
-Logic: If photocell read value corresponds to no light detected then set LED to max. If light is detected set LED to off.
+Logic: Set LEDstate depending on photocell.
 Output: Send LED value to LED, write to serial monitor.
 */
 
@@ -9,10 +9,13 @@ bool LEDstate = 0;
 
 void setup()
 {
-    pin
+    pinMode(10, OUTPUT); //Set pinmode for LED
+    pinMode(11, INPUT); //Set pinmode for photocell
+    Serial.begin(115200); //Set BAUD rate
 }
 
 void loop()
 {
-    
+    photo = analogRead(11);
+    Serial.println(photo);
 }
