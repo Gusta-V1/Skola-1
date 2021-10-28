@@ -2,6 +2,8 @@
  Input: Read buttons
  Logic: Increase or decrease blink frequency variable depending on input.
  Output: Send blink frequency (variable) to LED.
+
+ *NOTE Frequency is not actually a frequency (Hz) since in the program it depends on cpu clock speed and not timed seconds.*
  **/
 
 int(buttonIncrease) = 0; //Variable for state of increase-blink button
@@ -20,20 +22,23 @@ void setup() {
 }
 
 void loop() {
+  //Input
   buttonIncrease = digitalRead(buttonIncreasePin); //Reads increase-button press
   buttonDecrease = digitalRead(buttonDecreasePin); //Reads decrease-button press
   
+  //Logic
   if (buttonIncrease == 0){ //If increase-button is pressed add delta to frequency of blink
     freq += delta;
   }
   if (buttonDecrease == 0){ //If decrease-button is pressed subtract delta from frequency of blink
     freq -= delta;
   }
-  freq=constrain(freq, 0, 1000);
+  freq=constrain(freq, 0, 1000); //Blink interval is constrained between 0 and 1000
 
+//Output
   digitalWrite(LED_BUILTIN, HIGH); //Turn LED on
   delay(freq); //Wait this ammount of time, keep current state
-  digitalWrite(LED_BUILTIN, LOW); //Turn of LED
+  digitalWrite(LED_BUILTIN, LOW); //Turn LED off
   delay(freq); //Wait this ammount of time, keep current state
-  Serial.println(freq);
+  Serial.println(freq); //Print blink interval to monitor
 }
